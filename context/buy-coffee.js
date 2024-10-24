@@ -72,6 +72,10 @@ async function main() {
   const memos = await buyMeACoffee.getMemos();
   await printMemos(memos);
 
+  console.log("--OWNER--");
+  const _owner = await buyMeACoffee.getOwner();
+  console.log(_owner);
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -28,6 +28,10 @@ contract BuyMeACoffee {
         owner = payable(msg.sender);
     }
 
+    function getOwner() public view returns (address) {
+        return owner;
+    }
+
     /**
      * @dev function to buy a coffee for the owner
      * @param _name name of the coffee buyer
@@ -49,9 +53,11 @@ contract BuyMeACoffee {
     /**
      * @dev function to send tips to the owner of this contract
      */
-    function withdrawCoffee() public {
+    function withdrawCoffee() public payable {
         require(msg.sender == owner, "Oops! Only the owner can withdraw tips.");
-        require(owner.send(address(this).balance));
+
+        uint256 tips = address(this).balance;
+        payable(owner).transfer(tips);
     }
 
     /**
